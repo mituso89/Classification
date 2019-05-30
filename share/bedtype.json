@@ -1,0 +1,14 @@
+[ 
+    {
+        "name": "king",
+        "accommodate": "King",
+        "value": 2300,
+        "title": "King"
+      },
+      {
+        "name": "queen",
+        "accommodate": "Queen",
+        "value": 2350,
+        "title": "Queen"
+      }
+]

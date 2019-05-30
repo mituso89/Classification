@@ -17,6 +17,7 @@ import common.common as cm
 import re
 from bs4 import BeautifulSoup
 from nltk.corpus import stopwords
+import csv
 
 
 class TextClassificationPredict(object):
@@ -48,11 +49,13 @@ class TextClassificationPredict(object):
         with open(filename, 'wb') as f:
             pickle.dump(clf, f)
 
-    
-        
+    def readCSV():
+
+        df = pd.read_csv("people.csv")
+        return df
 
     def clean_text(text):
-        REPLACE_BY_SPACE_RE = re.compile('[/(){}\[\]\|@,;]')
+        REPLACE_BY_SPACE_RE = re.compile('[/(){}\[\]\|@,;-]')
         BAD_SYMBOLS_RE = re.compile('[^0-9a-z #+_]')
         STOPWORDS = set(stopwords.words('english'))
         """
@@ -70,34 +73,68 @@ class TextClassificationPredict(object):
     def get_train_data(self):
         common = cm.Common()
         #  train data
-
+        
         url = "/home/ubutu/Documents/Untitled1.csv"
-        train_data = TextClassificationPredict.connectMysql()
-     
+        #train_data = TextClassificationPredict.connectMysql()
+        
+        train_data = TextClassificationPredict.readCSV()
+       
         df_train = pd.DataFrame(train_data)
-
-        print(df_train.iloc[3714])
-
         df_train['room_name'] = df_train["room_name"].apply(TextClassificationPredict.clean_text)
 
-        print(df_train.iloc[3714])
+        
+        dfview = df_train.drop(df_train[ df_train['view'] == "Other" ].index )
+        dfBedType = df_train.drop(df_train[ df_train['bedType'] == "Other" ].index )
+        dfBed = df_train.drop(df_train[ df_train['bed'] == "Other" ].index )
+
+        
+        
 
         target = train_data['master_room_type']
-        
+        targetview = dfview['view']
+        targetBedType = dfBedType['bedType']
+        targetBed = dfBed['bed']
+      
         traindata, testdata,labels_train, labels_test = train_test_split(df_train,target, test_size = 0.2, random_state = 10)
+        traindataview, testdataview,labels_trainview, labels_testview = train_test_split(dfview,targetview, test_size = 0.2, random_state = 10)
+        traindataBedType, testdataBedType,labels_trainBedType, labels_testBedType = train_test_split(dfBedType,targetBedType, test_size = 0.2, random_state = 10)
+        traindataBed, testdataBed,labels_trainBed, labels_testBed = train_test_split(dfBed,targetBed, test_size = 0.2, random_state = 10)
 
-        model = NaiveBayesModel()
-   
+        #model = NaiveBayesModel()
+        model = SVMModel()
+        modelview = SVMModel()
+        modelBedType = SVMModel()
+        modelBed = SVMModel()
+       
         clf = model.clf.fit(traindata["room_name"], traindata.master_room_type)
-            
+        clfview = modelview.clf.fit(traindataview["room_name"], traindataview.view)
+        clfBedType = modelBedType.clf.fit(traindataBedType["room_name"], traindataBedType.bedType)
+        clfBed = modelBed.clf.fit(traindataBed["room_name"], traindataBed.bed)
+        
         predicted = clf.predict(testdata['room_name'].apply(TextClassificationPredict.clean_text))
+        predictedview = clfview.predict(testdataview['room_name'].apply(TextClassificationPredict.clean_text))
+        predictedBedType = clfBedType.predict(testdataBedType['room_name'].apply(TextClassificationPredict.clean_text))
+        predictedBed = clfBed.predict(testdataBed['room_name'].apply(TextClassificationPredict.clean_text))
          
-        print (predicted)
+        #print (predicted)
         print('accuracy %s' % accuracy_score(predicted, labels_test))
+        print('accuracyView %s' % accuracy_score(predictedview, labels_testview))
+        print('accuracyBedType %s' % accuracy_score(predictedBedType, labels_testBedType))
+        print('accuracyBed %s' % accuracy_score(predictedBed, labels_testBed))
+        
         a = clf.predict_proba(testdata["room_name"])
         TextClassificationPredict.save_model(os.path.abspath(os.path.dirname(__file__)) + "/x_transformer.pkl", clf)
-     
-    
+        TextClassificationPredict.save_model(os.path.abspath(os.path.dirname(__file__)) + "/x_transformerView.pkl", clfview)
+        TextClassificationPredict.save_model(os.path.abspath(os.path.dirname(__file__)) + "/x_transformerBedType.pkl", clfBedType)
+        TextClassificationPredict.save_model(os.path.abspath(os.path.dirname(__file__)) + "/x_transformerViewBed.pkl", clfBed)
+
+
+        dt = pd.DataFrame(testdata)
+        dt["predicted"] = predicted
+
+        #dt.to_csv("test.csv")
+      
+       
 
         
 

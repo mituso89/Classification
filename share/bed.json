@@ -1,0 +1,27 @@
+[ 
+    {
+        "name": "triple",
+        "accommodate": "Triple",
+        "value": 2300,
+        "title": "Triple"
+      },
+      {
+        "name": "twin",
+        "accommodate": "Twin",
+        "value": 2350,
+        "title": "Twin"
+      },
+      {
+        "name":    "double",
+        "accommodate": "Double",
+        "value": 2390,
+        "title": "Double"
+      },
+      {
+        "name": "single",
+        "accommodate": "Single",
+        "value": 2400,
+        "title": "Single"
+      }
+    
+]

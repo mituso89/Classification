@@ -1,0 +1,89 @@
+[ 
+    {
+        "name":"executive",
+        "accommodate": "Executive",
+        "value": 2300,
+        "title": "Executive"
+      },
+      {
+        "name": "suite",
+        "accommodate": "Suite",
+        "value": 2350,
+        "title": "Suite"
+      },
+      {
+        "name": "primier",
+        "accommodate": "Primier",
+        "value": 2390,
+        "title": "Primier"
+      },
+      {
+        "name": "premium",
+        "accommodate": "Premium",
+        "value": 2400,
+        "title": "Premium"
+      },
+      {
+        "name": "superior",
+        "accommodate": "Superior",
+        "value": 2400,
+        "title": "Superior"
+      },
+      {
+        "name": "supreme",
+        "accommodate": "Supreme",
+        "value": 2400,
+        "title": "Supreme"
+      },
+      {
+        "name": "masion",
+        "value": 2450,
+        "accommodate": "Masion",
+        "title": "Masion"
+      },
+      {
+        "name": "adjoining",
+        "value": 2450,
+        "accommodate": "Adjoining",
+        "title": "Adjoining"
+      },
+      {
+        "name": "deluxe",
+        "value": 2450,
+        "accommodate": "Deluxe",
+        "title": "Deluxe"
+      },
+      {
+        "name": "quadruple",
+        "value": 2450,
+        "accommodate": "Quadruple",
+        "title": "Quadruple"
+      },
+      {
+        "name": "shared",
+        "value": 2450,
+        "accommodate": "Hostel",
+        "title": "Hostel"
+      },
+      {
+        "name": "penthouse",
+        "accommodate": "Apartment",
+        "value": 2600,
+        "title": "Penthouse"
+      }
+      ,
+      {
+        "name": "premier",
+        "accommodate": "Premier",
+        "value": 2650,
+        "title": "Premier"
+      }
+      ,
+      {
+        "name": "classic",
+        "accommodate": "Classic",
+        "value": 2650,
+        "title": "Classic"
+      }
+    
+]

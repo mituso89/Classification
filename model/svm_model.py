@@ -16,7 +16,7 @@ class SVMModel(object):
             
             ("vect", CountVectorizer()),
             ("tfidf", TfidfTransformer()),
-            ("clf-svm", SGDClassifier(loss='log', penalty='l2', alpha=1e-3, n_iter=5, random_state=None))
+            ("clf-svm", SGDClassifier(loss='log', penalty='l2', alpha=1e-3, random_state=42))
         ])
 
         return pipe_line
