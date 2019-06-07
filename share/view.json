@@ -4,5 +4,37 @@
         "accommodate": "City",
         "value": 2300,
         "title": "City"
+      },
+      {
+        "name": "towers",
+        "accommodate": "Towers",
+        "value": 2300,
+        "title": "Towers"
+      },
+      {
+        "name": "garden",
+        "accommodate": "Garden",
+        "value": 2300,
+        "title": "Garden"
+      },
+      {
+        "name": "sea",
+        "accommodate": "Sea",
+        "value": 2300,
+        "title": "Sea"
+      }
+      ,
+      {
+        "name": "lake",
+        "accommodate": "Lake",
+        "value": 2300,
+        "title": "Lake"
+      }
+      ,
+      {
+        "name": "golf",
+        "accommodate": "Golf",
+        "value": 2300,
+        "title": "Golf"
       }
 ]

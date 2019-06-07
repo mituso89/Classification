@@ -6,12 +6,14 @@ import mysql.connector
 from mysql.connector import Error
 import csv
 import common.common as cm
+from datetime import datetime as dt
+
 
 
 def connectMysql():
     try:
         mySQLconnection = mysql.connector.connect(host='13.251.123.143',port='3306',database='HotelGatewayNew',user='hotelgateway',password='SeechoitlOfwoRwObEaphOabdLVy')
-        sql_select_Query = "SELECT master_room_type,room_name FROM HotelGatewayNew.room_type_mapping where master_room_type is not null group by master_room_type ,room_name "
+        sql_select_Query = "SELECT master_room_type,room_name FROM HotelGatewayNew.room_type_mapping where master_room_type  is  null and room_name <> '' group by room_name"
         cursor = mySQLconnection .cursor()
         cursor.execute(sql_select_Query)
         records = cursor.fetchall()
@@ -53,13 +55,18 @@ def saveCsv():
     
     
     df=[]
+    
     for item in pd:
-        savetext =handlText(item[0],listjson,item[1]) 
+        
+        savetext =handlText(item[1],listjson,item[0]) 
         df.append(savetext)
         
 
     keys = df[0].keys()
-    with open('people.csv', 'w') as output_file:
+    
+    filename = str(dt.now().year)+ "-"+ str(dt.now().month) +  "-" +str(dt.now().day) +  "-" + str(dt.now().hour) +   "-" + str(dt.now().minute) +  "-"+ str(dt.now().second)
+
+    with open(filename+'people.csv', 'w') as output_file:
         dict_writer = csv.DictWriter(output_file, keys)
         dict_writer.writeheader()
         dict_writer.writerows(df)
@@ -68,6 +75,7 @@ def saveCsv():
 
     
 def handlText(text,listjson,room_master):
+    
     words = cm.Common.clean_text(text)
     
 
@@ -83,26 +91,26 @@ def handlText(text,listjson,room_master):
         if word !="":
             for item in listjson["hotelTyleName"]:
                
-                if item['name'] == word:
+                if item['name'] == word and item['name'] not in hotelType:
                     hotelType =hotelType + word+ " "
               
             for item in listjson["bedName"]:
                 
-                if item['name'] == word:
+                if item['name'] == word and item['name'] not in bedType:
                     bedType =bedType +word +" "
             
             for item in listjson["bedtypeName"]:
                 
-                if item['name'] == word:
+                if item['name'] == word  and item['name'] not in bed:
                     bed =bed+ word + " "
               
             for item in listjson["roomTypeName"]:
                 
-                if item['name'] == word:
+                if item['name'] == word  and item['name'] not in roomType:
                     roomType =roomType+ word+ " "
               
-            for item in listjson["viewName"]:
-                if item['name'] == word:
+            for item in listjson["viewName"] :
+                if item['name'] == word   and item['name'] not in view:
                     view =view+ word + " "
 
     if hotelType.strip() =="":

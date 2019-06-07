@@ -49,9 +49,9 @@ class TextClassificationPredict(object):
         with open(filename, 'wb') as f:
             pickle.dump(clf, f)
 
-    def readCSV():
+    def readCSV(filename):
 
-        df = pd.read_csv("people.csv")
+        df = pd.read_csv(filename)
         return df
 
     def clean_text(text):
@@ -74,13 +74,26 @@ class TextClassificationPredict(object):
         common = cm.Common()
         #  train data
         
-        url = "/home/ubutu/Documents/Untitled1.csv"
+        url = "people.csv"
         #train_data = TextClassificationPredict.connectMysql()
         
-        train_data = TextClassificationPredict.readCSV()
+        train_data = TextClassificationPredict.readCSV(url)
+
+        checkdata =  TextClassificationPredict.readCSV("peoplemaster.csv")
+        print(checkdata)
+
+        
        
         df_train = pd.DataFrame(train_data)
+        chectrain = pd.DataFrame(checkdata)
+
+        df_train['category_id'] = df_train['master_room_type'].factorize()[0]
+        train_outcome = pd.crosstab(index=train_data["master_room_type"],  # Make a crosstab
+                              columns="count")      # Name the count column
+
+        
         df_train['room_name'] = df_train["room_name"].apply(TextClassificationPredict.clean_text)
+        chectrain['room_name'] = chectrain["room_name"].apply(TextClassificationPredict.clean_text)
 
         
         dfview = df_train.drop(df_train[ df_train['view'] == "Other" ].index )
@@ -90,12 +103,16 @@ class TextClassificationPredict(object):
         
         
 
-        target = train_data['master_room_type']
+        #target = train_data['master_room_type']
+        target = checkdata['master_room_type']
         targetview = dfview['view']
+
+        
         targetBedType = dfBedType['bedType']
         targetBed = dfBed['bed']
+        
       
-        traindata, testdata,labels_train, labels_test = train_test_split(df_train,target, test_size = 0.2, random_state = 10)
+        traindata, testdata,labels_train, labels_test = train_test_split(chectrain,target, test_size = 0.2, random_state = 10)
         traindataview, testdataview,labels_trainview, labels_testview = train_test_split(dfview,targetview, test_size = 0.2, random_state = 10)
         traindataBedType, testdataBedType,labels_trainBedType, labels_testBedType = train_test_split(dfBedType,targetBedType, test_size = 0.2, random_state = 10)
         traindataBed, testdataBed,labels_trainBed, labels_testBed = train_test_split(dfBed,targetBed, test_size = 0.2, random_state = 10)

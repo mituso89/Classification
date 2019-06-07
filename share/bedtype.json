@@ -1,14 +1,28 @@
 [ 
     {
-        "name": "king",
-        "accommodate": "King",
+        "name": "triple",
+        "accommodate": "Triple",
         "value": 2300,
-        "title": "King"
+        "title": "Triple"
       },
       {
-        "name": "queen",
-        "accommodate": "Queen",
+        "name": "twin",
+        "accommodate": "Twin",
         "value": 2350,
-        "title": "Queen"
+        "title": "Twin"
+      },
+      {
+        "name":    "double",
+        "accommodate": "Double",
+        "value": 2390,
+        "title": "Double"
+      },
+      {
+        "name": "single",
+        "accommodate": "Single",
+        "value": 2400,
+        "title": "Single"
       }
+    
 ]
+
