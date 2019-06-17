@@ -1,7 +1,5 @@
 ./model
-classification.py
-python.py
-people.csv
+nltk
 test.csv
 ./transformer
 text_classification_predict.py

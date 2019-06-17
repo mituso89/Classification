@@ -103,8 +103,8 @@ class TextClassificationPredict(object):
         
         
 
-        #target = train_data['master_room_type']
-        target = checkdata['master_room_type']
+        target = train_data['master_room_type']
+        #target = checkdata['master_room_type']
         targetview = dfview['view']
 
         
@@ -112,7 +112,7 @@ class TextClassificationPredict(object):
         targetBed = dfBed['bed']
         
       
-        traindata, testdata,labels_train, labels_test = train_test_split(chectrain,target, test_size = 0.2, random_state = 10)
+        traindata, testdata,labels_train, labels_test = train_test_split(df_train,target, test_size = 0.2, random_state = 10)
         traindataview, testdataview,labels_trainview, labels_testview = train_test_split(dfview,targetview, test_size = 0.2, random_state = 10)
         traindataBedType, testdataBedType,labels_trainBedType, labels_testBedType = train_test_split(dfBedType,targetBedType, test_size = 0.2, random_state = 10)
         traindataBed, testdataBed,labels_trainBed, labels_testBed = train_test_split(dfBed,targetBed, test_size = 0.2, random_state = 10)
