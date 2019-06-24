@@ -5,7 +5,7 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.pipeline import Pipeline
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
-from transformer.feature_transformer import FeatureTransformer
+#from transformer.feature_transformer import FeatureTransformer
 from sklearn.feature_selection import SelectKBest,chi2
 #import nltk 
 #from nltk.tokenize import word_tokenize

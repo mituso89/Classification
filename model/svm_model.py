@@ -2,7 +2,7 @@
 from sklearn.pipeline import Pipeline
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
-from transformer.feature_transformer import FeatureTransformer
+#from transformer.feature_transformer import FeatureTransformer
 from sklearn.linear_model import SGDClassifier
 
 

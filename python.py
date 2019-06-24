@@ -15,7 +15,7 @@ import os
 import pickle
 import common.common as cm
 import re
-from bs4 import BeautifulSoup
+#from bs4 import BeautifulSoup
 from nltk.corpus import stopwords
 import csv
 
